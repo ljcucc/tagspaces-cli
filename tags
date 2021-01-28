@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+import sys, os, glob, json 
+
+def getFilelist(mypath):
+    from os import listdir
+    from os.path import isfile, join
+    return [f for f in listdir(mypath) if isfile(join(mypath, f))]
+
+def saveTag(tags):
+    from pathlib import Path
+    from os import path
+    filepath = str(Path.home()) + "/.tagspaces.json"
+
+    data = {
+            'tags':[]
+    }
+    if(path.exists(filepath)):
+        with open(filepath) as jsonfile:
+            data = json.load(jsonfile)
+
+    for item in tags:
+        if(not item in data['tags']):
+            data['tags'].append(item)
+
+    with open(filepath, mode="w") as json_file:
+        json.dump(data, json_file)
+
+    print("tag saved to "+filepath)
+
+class fileObj:
+    def __init__(self, name, tags):
+        super().__init__()
+        self.name = name
+        self.tags = tags
+
+    name = "undefined"
+    tags = []
+
+    def show(self):
+        print("\t * "+self.name+" : ",end=" `")
+        print(*self.tags, sep="`, `",end="` ")
+        print()
+
+def listTags():
+    global options
+
+    path = os.getcwd()+"/.ts/"
+    filelist = getFilelist(path)
+    tags = {}
+
+    print("\n# files with tags: \n")
+    for filename in filelist:
+        with open(path+filename, encoding='utf-8-sig') as jsonfile:
+
+            data = json.load(jsonfile)
+
+            if(not "appName" in data or data["appName"] != "TagSpaces"):
+                continue
+
+            curFileTags = []
+            for item in data['tags']:
+
+                title = item['title']
+                color = item['color']
+                if not title in tags:
+                    tags[title] = color
+                
+                curFileTags.append(title)
+
+            fileObj(name=title, tags = curFileTags).show()
+
+    print("\n# found tags in folder: \n")
+    for tag in tags:
+        print("\t* `"+tag+"`")
+    print()
+
+    if("s" in options):
+        saveTag(tags.keys())
+
+def listGlobalTags():
+    from pathlib import Path
+    from os import path
+
+    filepath = str(Path.home()) + "/.tagspaces.json"
+
+    data = {
+            'tags':[]
+    }
+    if(path.exists(filepath)):
+        with open(filepath) as jsonfile:
+            data = json.load(jsonfile)
+    
+    print("\n# listing global found tags\n")
+    for tag in data['tags']:
+        print("\t* `"+tag+"`")
+    print()
+
+options = []
+func = ""
+
+def main():
+    global options, func
+    '''for (index, arg) in enumerate(sys.argv):
+        print(str(index) + ": " + arg)
+        #print(os.getcwd())'''
+    
+    args = sys.argv
+    del args[0]
+
+    for command in args:
+        if(command[0] != "-"):
+            func = command
+        else:
+            options.append(command[1:])
+
+    if(func == "list" or func == "l"):
+        if("g" in options or "--global" in options):
+            listGlobalTags()
+        else:
+            listTags()
+
+    if("-debug" in options):
+        print("func:    " + func)
+        print("options: " + str(options))
+
+if __name__ == "__main__":
+    main()
