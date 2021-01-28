@@ -3,7 +3,10 @@ TagSpaces is great, but how about the terminal users? now there's the new tool t
 which compatible with the offical sidecar format.
 
 ## How to use?
-Adding tags script into your $PATH, then that it! currently support python, I'll build more version for that.
+Adding tags script into your $PATH, then that it! currently support python, I'll build more version for that. or you are lazy to type command, here you go:
+```bash
+echo export "PATH=\$PATH":"$(pwd)/bin"
+```
 
 ## QnA
 
