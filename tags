@@ -77,7 +77,7 @@ def listTags():
         print("\t* `"+tag+"`")
     print()
 
-    if("s" in options):
+    if("s" in options or "-save" in options):
         saveTag(tags.keys())
 
 def listGlobalTags():
