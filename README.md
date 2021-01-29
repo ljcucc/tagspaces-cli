@@ -52,7 +52,7 @@ tags new
 tags n
 ```
 
-With `--file [path2file]` tag you can add tag to file accurately
+With `--file [path2file]` tag you can add tag to file accurately without terminal UI:
 ```bash
 # or using -f for --file instead
 tags n -f ./README.md
