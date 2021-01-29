@@ -156,6 +156,7 @@ def editGlobalTags():
 options = []
 optionArgs = {}
 func = ""
+subfunc = []
 
 def main():
 
@@ -171,6 +172,8 @@ def main():
         if(command[0] != "-"):
             if(len(options) == 0 and func == ""):
                 func = command
+            elif(func != ""):
+                subfunc.append(command)
             else:
                 optionArgs.update({options[-1:][0]:command})
                 options = options[:-1]
