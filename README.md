@@ -7,10 +7,10 @@ which compatible with the offical sidecar format.
 Adding tags script into your $PATH, then that it! currently support python, I'll build more version for that. or you are lazy to type command, here you go:
 ```bash
 # bash
-echo export "PATH=\$PATH":"$(pwd)/bin" > ~/.bashrc
+echo export "PATH=\$PATH":"$(pwd)/" >> ~/.bashrc
 
 # zsh
-echo export "PATH=\$PATH":"$(pwd)/bin" > ~/.zshrc
+echo export "PATH=\$PATH":"$(pwd)/" >> ~/.zshrc
 ```
 ### Get Started
 
