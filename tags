@@ -44,6 +44,7 @@ class fileObj:
         print("\t * "+self.name+" : ",end="")
         for tag in self.tags:
             terminal.printTag(tag)
+            print(", ",end="")
         # print(*[tag['title'] for tag in self.tags], sep="`, `",end="` ")
         print()
 
@@ -80,6 +81,7 @@ def listTags():
         tag = tags[title]
         # print("\t* `"+tag+"`")
         terminal.printTag(tag)
+        print(", ",end="")
     print()
 
     if("s" in options or "-save" in options):
@@ -97,10 +99,16 @@ def listGlobalTags():
     if(path.exists(filepath)):
         with open(filepath) as jsonfile:
             data = json.load(jsonfile)
+    else:
+        print(filepath + " not found! try to use `tags list --save` to init")
+        return
     
     print("\n# listing global found tags\n")
     for title in data['tags']:
-        print("\t* `"+data['tags'][title]['title']+"`")
+        print("\t* " ,end="")
+        terminal.printTag(data['tags'][title])
+        print(", ",end="")
+        # print("\t* `"+data['tags'][title]['title']+"`")
     print()
 
 def printHelp():
@@ -122,7 +130,22 @@ def printHelp():
 def newTag():
     global optionArgs
 
-    filepath = (fs.selectFile() if (not '-file' in optionArgs and not 'f' in optionArgs nad not 'p' in optionArgs and not '-path' in optionArgs) else optionArgs[('-file' if '-file' in optionArgs else ('f' if 'f' in optionArgs else ('p' if 'p' in optionArgs else ('-path'))))])
+    filepath = ""
+
+    key = "undefined"
+    if("-file" in optionArgs):
+        key = "-file"
+    elif("f" in optionArgs):
+        key = "f"
+    elif("-path" in optionArgs):
+        key = "-path"
+    elif("p" in optionArgs):
+        key = "p"
+    else:
+        filepath = fs.selectFile()
+    
+    if key in optionArgs:
+        filepath = fs.getFullpath(optionArgs[key])[0]
 
     print("Create tag with file: "+str(filepath))
 
