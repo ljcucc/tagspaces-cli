@@ -203,7 +203,7 @@ def main():
         if(command[0] != "-"):
             if(len(options) == 0 and func == ""):
                 func = command
-            elif(func != ""):
+            elif(func != "" and len(options) == 0):
                 subfunc.append(command)
             else:
                 optionArgs.update({options[-1:][0]:command})
