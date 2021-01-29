@@ -3,6 +3,7 @@ from os import path
 import json
 import terminal
 from time import sleep
+import datetime
 
 selectedIndex = 0
 tags = {}
@@ -57,7 +58,7 @@ def keyInput():
     elif(mode == "k"):
         selectedIndex -= 1
     elif(mode == "d" or mode == "D"):
-        addTag()
+        result = addTag()
     elif(mode.lower() == "q"):
         terminal.clearScreen()
         confirm = input("WARNING: Are you sure you want to quit without save? (Y or yes) ")
@@ -86,6 +87,13 @@ def keyInput():
     displayTag()
     keyInput()
 
+def getSpecialFormat():
+    result = "T".join(str(datetime.datetime.now()).split(" "))
+    result = result.split(".")
+    result[1] = result[1][:3]
+    result = ".".join(result)
+    return result
+
 def addTag():
     terminal.clearScreen()
     print("# Add new tag:")
@@ -93,17 +101,31 @@ def addTag():
     print("WARNING: This aciton will not add any tag\n"+ (" "*9) +"into your global environment until you run `tags l -s`\n")
     terminal.setTextColor(255,255,255)
     name = input("name: ")
-    color = input("color (default #fff): ")
+    color = input("color (default #fff, HEX only): ")
+    color = color if color.strip() != "" else "ffffff"
+    color = color if color[0] == "#" else "#"+color
 
     confirm = input("Sure you want this config? (Y for yes) ").upper()
     if confirm == "YES" or confirm == "Y":
         print("\nDone! adding...")
     else:
         print("\nTag won't add")
-    
-    sleep(1)
-        
-    terminal.clearScreen()
+        sleep(1)
+        terminal.clearScreen()
+        return -1
+
+    newTagData = {
+       'type': 'sidecar',
+       'title': name,
+       'color': color,
+       'textColor': 'white',
+       'created_date': getSpecialFormat(),
+       'modified_date': getSpecialFormat()
+    } 
+
+    tags.update({
+        name: newTagData
+    })
 
 def formatData():
     print("starting format...")
