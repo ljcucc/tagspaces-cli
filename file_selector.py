@@ -72,7 +72,6 @@ def printFileList(mypath):
 
   if selectedIndex >= len(paths):
     selectedIndex = len(paths) - 1
-    return
 
   for (index,path) in enumerate(paths):
     if(path == "(Go back) ../"):
