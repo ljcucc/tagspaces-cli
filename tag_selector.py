@@ -16,11 +16,11 @@ def displayTag():
     terminal.setTextColor(255,255,255)
     print("Add or remove tags with list below:")
     terminal.setTextColor(100,100,100)
-    print("\n(switch using SPACE key, Done using ENTER key, \n\tD key for add new tag, \n\tQ for quit without save) \n")
+    print("\n(switch using SPACE key, Done using ENTER key, \n\tJ and K for up and down like vim, \n\tD key for add new tag, \n\tQ for quit without save) \n")
     terminal.setTextColor(255,255,255)
 
     for (index, title) in enumerate(tags):
-        print(" "*4+"(" + ("\u001b[7m" if selectedIndex == index else "\u001b[0m") + ("*" if title in selectedTags else " ") + "\u001b[0m)", end="")
+        print(" "*4+"(" + ("\u001b[7m" if selectedIndex == index else "\u001b[0m") + ("*" if title in selectedTags else " ") + "\u001b[0m) ", end="")
         # print("\t("+ ("*" if selectedIndex == index else " ") +") " ,end="")
         terminal.printTag(tags[title])
         print()
