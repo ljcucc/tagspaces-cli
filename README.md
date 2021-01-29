@@ -18,7 +18,7 @@ echo export "PATH=\$PATH":"$(pwd)/" >> ~/.zshrc
 ```
 ### Get Started
 
-### Listing
+#### Listing
 Listing tags of files and tags in folder by using:
 ```bash
 tags list
@@ -40,7 +40,7 @@ tags list --global
 tags l -g
 ```
 
-### Adding
+#### Adding
 
 Adding new tag to file by using:
 ```bash
