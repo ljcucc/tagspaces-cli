@@ -102,8 +102,9 @@ options = []
 func = ""
 
 def main():
-    test.run()
-    
+    if test.run():
+        return
+
     global options, func
     '''for (index, arg) in enumerate(sys.argv):
         print(str(index) + ": " + arg)
