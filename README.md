@@ -3,6 +3,7 @@ TagSpaces is great, but how about the terminal users? now there's the new tool t
 which compatible with the offical sidecar format.
 
 ## How to use?
+### Installation
 Adding tags script into your $PATH, then that it! currently support python, I'll build more version for that. or you are lazy to type command, here you go:
 ```bash
 # bash
@@ -10,6 +11,28 @@ echo export "PATH=\$PATH":"$(pwd)/bin" > ~/.bashrc
 
 # zsh
 echo export "PATH=\$PATH":"$(pwd)/bin" > ~/.zshrc
+```
+### Get Started
+
+Listing tags of files and tags in folder by using:
+```bash
+tags list
+# or (l) for abbr
+tags l
+```
+
+Listing tags and remember it to global environment:
+```bash
+tags list --save
+# or (-s) for abbr
+tags l -s
+```
+
+Then using `--global` or `-g` to list all remembered tags in global environment:
+```bash
+tags list --global
+# or (-g) for abbr
+tags l -g
 ```
 
 ## QnA
