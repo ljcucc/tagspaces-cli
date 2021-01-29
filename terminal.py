@@ -1,3 +1,5 @@
+import os
+
 def setTextColor(r,g,b):
     print("\x1b[38;5;%dm"% (rgb_to_xterm(r,g,b)), end="")
 
@@ -48,6 +50,12 @@ def getchar():
 
 def move (y, x):
   print("\033[%d;%dH" % (y, x))
+
+def getWidth():
+  return os.get_terminal_size().columns
+
+def getHeight():
+  return os.get_terminal_size().lines
 
 def printTag(tag):
     colorCode = tag['color'][:-2]
