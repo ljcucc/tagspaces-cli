@@ -4,6 +4,7 @@ import sys, os, glob, json
 # Local files
 import terminal, test
 import file_selector as fs
+import tag_selector as ts
 
 def getFilelist(mypath):
     from os import listdir
@@ -167,6 +168,13 @@ def newTag():
         filepath = fs.getFullpath(optionArgs[key])[0]
 
     print("Create tag with file: "+str(filepath))
+
+    if("-tags" in optionArgs):
+        key = "-tags"
+    elif("t" in optionArgs):
+        key = "t"
+    else:
+        ts.runWithPath(filepath)
 
 def editGlobalTags():
     print("Trying to edit global tags...")

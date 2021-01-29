@@ -102,7 +102,46 @@ def addTag():
         
     terminal.clearScreen()
 
+def formatData():
+    print("starting format...")
+
+def updateTags():
+    print("update tags...")
+
+def runWithPath(filepath):
+    global tags, selectedTagss
+
+    print("edit tag with filepath...")
+    getTagsFromPath(filepath)
+
+    run()
+
+def getTagsFromPath(filepath):
+
+    data = {}
+
+    filepath = path.dirname(filepath)+"/.ts/"+path.basename(filepath)+".json"
+    print(filepath)
+
+    if(not path.exists(filepath)):
+        return {}
+
+    with open(filepath, encoding='utf-8-sig') as jsonfile:
+        data = json.load(jsonfile)
+    
+    fileTags = data['tags']
+    
+    for tag in fileTags:
+        title = tag['title']
+        
+        if(not title in selectedTags):
+            selectedTags.update({title:tag})
+        
+        if(not title in tags):
+            tags.update({title:tag})
+
 def run():
+    print("starting format...")
 
     readTags() # force read file
     displayTag() # first display

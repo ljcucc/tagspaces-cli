@@ -11,6 +11,4 @@ def run():
 
     # print(ord(terminal.getchar()))
 
-    ts.run()
-
     return True
