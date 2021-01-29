@@ -72,5 +72,5 @@ def printTag(tag):
     print(tag['title'], end="")
 
     setTextColor(255,255,255)
-    print(", ", end="")
+    print("", end="")
     
