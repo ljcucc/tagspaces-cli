@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import sys, os, glob, json 
 
+# Local files
+import terminal, test
+
 def getFilelist(mypath):
     from os import listdir
     from os.path import isfile, join
@@ -99,6 +102,8 @@ options = []
 func = ""
 
 def main():
+    test.run()
+    
     global options, func
     '''for (index, arg) in enumerate(sys.argv):
         print(str(index) + ": " + arg)
