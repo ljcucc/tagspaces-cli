@@ -187,7 +187,7 @@ def main():
       cMode = ""
     else:
       cMode = "NOTE-MODE"
-  elif (ord(mode) == 13):
+  elif (ord(mode) == 13): # [Enter] key
     selected = filelist[selectedIndex]
     if(selected == "(Go back) ../"):
       pwd = pwd+"/../"
@@ -218,3 +218,5 @@ def selectFile():
     print()
     print("🔰 Try to using --file [path2file] to quickly add tags to file, more at `tags help add`.")
     print()
+
+    return getFullpath(filelist[selectedIndex])[0]
