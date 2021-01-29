@@ -104,7 +104,8 @@ def listGlobalTags():
 
 def printHelp():
     print("""
-    # help
+    # TagSpaces CLI
+    A CLI version of TagSpaces that compatible with official one and works just fine.
 
     ## commands
 
