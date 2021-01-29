@@ -41,7 +41,7 @@ class fileObj:
 
     def show(self):
         print("\t * "+self.name+" : ",end=" `")
-        print(*self.tags, sep="`, `",end="` ")
+        print(*[tag['title'] for tag in self.tags], sep="`, `",end="` ")
         print()
 
 def listTags():
@@ -66,11 +66,11 @@ def listTags():
                 title = item['title']
                 color = item['color']
                 if not title in tags:
-                    tags[title] = color
+                    tags[title] = item
                 
-                curFileTags.append(title)
+                curFileTags.append(item)
 
-            fileObj(name=title, tags = curFileTags).show()
+            fileObj(name=title, tags = curFileTags, color=tags[title], ).show()
 
     print("\n# found tags in folder: \n")
     for tag in tags:
@@ -98,12 +98,21 @@ def listGlobalTags():
         print("\t* `"+tag+"`")
     print()
 
+def printHelp():
+    print("""
+    # help
+    
+    ## commands
+
+    * list: list tags
+        * -s : remember tags when detected
+        * -g : print remembered tags in system
+    """)
+
 options = []
 func = ""
 
 def main():
-    if test.run():
-        return
 
     global options, func
     '''for (index, arg) in enumerate(sys.argv):
@@ -119,15 +128,28 @@ def main():
         else:
             options.append(command[1:])
 
+    # commands implements
     if(func == "list" or func == "l"):
         if("g" in options or "--global" in options):
             listGlobalTags()
         else:
             listTags()
+        return
 
     if("-debug" in options):
         print("func:    " + func)
         print("options: " + str(options))
+        return
+    
+    if(func == "test"):
+        test.run()
+        return
+    
+    if(func == "" or len(options) or func == "help"):
+        printHelp()
+        return
+    
+    print("Command not found ,try `tags help` to print commands")
 
 if __name__ == "__main__":
     main()
