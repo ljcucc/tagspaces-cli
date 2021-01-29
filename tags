@@ -112,20 +112,39 @@ def listGlobalTags():
     print()
 
 def printHelp():
+    helps = {
+        'list':"""
+    * list: (or `l` for attr) list tags
+        * -s, --save : remember tags when detected
+        * -g, --global : print remembered tags in system
+        """,
+        'add':"""
+    * add: (or `new` or `n` for attr) add new tag to file
+        * --file [path], -f [path], --path [path], -p [path]: point a file to add
+        """
+    }
+
+    if(len(subfunc) == 1):
+        if(subfunc[0] in helps):
+            print(helps[subfunc[0]])
+            return
+        else:
+            print("help: command not found!")
+    elif(len(subfunc) > 1):
+        print("syntax is not correct! try using `tags help` to list command usage")
+
     print("""
     # TagSpaces CLI
 
     A CLI version of TagSpaces that compatible with official one and works just fine.
 
     ## commands
-
-    * list: (or `l` for attr) list tags
-        * -s, --save : remember tags when detected
-        * -g, --global : print remembered tags in system
     
-    * add: (or `new` or `n` for attr) add new tag to file
-        * --file [path], -f [path], --path [path], -p [path]: point a file to add
-    """)
+    Using `tags help [command]` to list command full description
+    
+    """,end="")
+
+    print(*["\t* "+key for key in helps.keys()],sep="\n",end="\n"*2)
 
 def newTag():
     global optionArgs
