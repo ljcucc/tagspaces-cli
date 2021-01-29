@@ -76,7 +76,7 @@ def printFileList(mypath):
   for (index,path) in enumerate(paths):
     if(path == "(Go back) ../"):
       if(index == selectedIndex):
-        print(bcolors.BG + path + (" " *(getWidth() - len(path))))
+        print(bcolors.HIGHLIGHT + path + (" " *(getWidth() - len(path))))
       else:
         print(bcolors.NORMAL + path + (" " *(getWidth() - len(path))))
       continue
@@ -84,7 +84,7 @@ def printFileList(mypath):
     if(folderMode() and isFile(path)):
       continue
     if(index == selectedIndex):
-      print(bcolors.BG + filename + (" " *(getWidth() - len(filename))))
+      print(bcolors.HIGHLIGHT + filename + (" " *(getWidth() - len(filename))))
     else:
       print(bcolors.NORMAL + filename + (" " *(getWidth() - len(filename))))
   print(bcolors.NORMAL + (" "*getWidth()+'\n')*(getHeight() - len(paths) - 2))
@@ -112,8 +112,8 @@ def getFullpath(mypath):
 
 class bcolors:
   BG = '\033[0;30;47m'
-  BG_BOLD = '\033[1;30;47m'
-  NORMAL = '\033[0;37;40m'
+  BG_BOLD = '\u001b[7m\u001b[1m'
+  NORMAL = '\u001b[0m'
   # HEADER = '\033[95m'
   # OKBLUE = '\033[94m'
   # OKCYAN = '\033[96m'
@@ -121,7 +121,7 @@ class bcolors:
   # WARNING = '\033[93m'
   # FAIL = '\033[91m'
   # ENDC = '\033[0m'
-  BOLD = '\033[1m'
+  HIGHLIGHT = '\u001b[7m'
   # UNDERLINE = '\033[4m',
 
 def updateSelectedIndex(inc):
@@ -144,7 +144,6 @@ def getRepeatTime():
   result = int(execRepeatTime)
   execRepeatTime = ""
   return result
-
 
 def isNaN(s):
     try: 
@@ -206,7 +205,6 @@ def main():
     clearScreen()
     print(ord(mode))
     print("bye bye...")
-
 
 def selectFile():
     print("listing file...")
