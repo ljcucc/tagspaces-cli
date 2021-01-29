@@ -63,13 +63,10 @@ tags n -p ./README.md
 
 ### Screenshots
 
-* tags list
 ![](./assets/tags_list.png)
 
-* tags n
 ![](./assets/tags_n.gif)
 
-* tags list --global
 ![](./assets/tags_l_-g.png)
 
 ## QnA
