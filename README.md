@@ -18,6 +18,7 @@ echo export "PATH=\$PATH":"$(pwd)/" >> ~/.zshrc
 ```
 ### Get Started
 
+### Listing
 Listing tags of files and tags in folder by using:
 ```bash
 tags list
@@ -38,6 +39,25 @@ tags list --global
 # or (-g) for abbr
 tags l -g
 ```
+
+### Adding
+
+Adding new tag to file by using:
+```bash
+# (👇) will auto open an terminal UI to select file and tags
+tags add
+
+# (👇)  or ... (are the same)
+tags new
+tags n
+```
+
+With `--file [path2file]` tag you can add tag to file accurately
+```bash
+# or using -f for --file instead
+tags n -f ./README.md
+```
+
 
 ## QnA
 
