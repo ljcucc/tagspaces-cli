@@ -112,8 +112,11 @@ def printHelp():
     ## commands
 
     * list: (or `l` for attr) list tags
-        * -s : remember tags when detected
-        * -g : print remembered tags in system
+        * -s, --save : remember tags when detected
+        * -g, --global : print remembered tags in system
+    
+    * add: (or `new` or `n` for attr) add new tag to file
+        * --file [path], -f [path], --path [path], -p [path]: point a file to add
     """)
 
 def newTag():
