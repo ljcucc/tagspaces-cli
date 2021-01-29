@@ -169,7 +169,7 @@ def main():
 
     for command in args:
         if(command[0] != "-"):
-            if(len(options) == 0):
+            if(len(options) == 0 and func == ""):
                 func = command
             else:
                 optionArgs.update({options[-1:][0]:command})
