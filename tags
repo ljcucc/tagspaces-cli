@@ -79,7 +79,8 @@ def listTags():
                 
                 curFileTags.append(item)
 
-            fileObj(name=title, tags = curFileTags ).show()
+            if(len(curFileTags) > 0):
+                fileObj(name=title, tags = curFileTags ).show()
 
     print("\n# found tags in folder: \n")
     for title in tags:
