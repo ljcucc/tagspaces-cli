@@ -76,3 +76,6 @@ Because sidecar dose not effect the origin file name, while the file name become
 
 ### Why using python3?
 Becuase every morden computer have python3 preinstalled, so Python3 become the better options to build this tools. About the "Windows" side, I'm not consider to build it, becuase no much people are using termianl in windows (and ~~terminal~~ command-line in windows is terrible, that's a common sens for sure :D )
+
+### More information
+look forward on [Official documentation](https://docs.tagspaces.org/dev/metafileformats)!
