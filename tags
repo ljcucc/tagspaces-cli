@@ -9,21 +9,21 @@ def getFilelist(mypath):
     from os.path import isfile, join
     return [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
-def saveTag(tags):
+def saveTag(tagsTitle, tags):
     from pathlib import Path
     from os import path
     filepath = str(Path.home()) + "/.tagspaces.json"
 
     data = {
-            'tags':[]
+            'tags':{}
     }
     if(path.exists(filepath)):
         with open(filepath) as jsonfile:
             data = json.load(jsonfile)
 
-    for item in tags:
-        if(not item in data['tags']):
-            data['tags'].append(item)
+    for title in tagsTitle:
+        if(not title in data['tags']):
+            data['tags'].update({title:tags[title]})
 
     with open(filepath, mode="w") as json_file:
         json.dump(data, json_file)
@@ -40,8 +40,10 @@ class fileObj:
     tags = []
 
     def show(self):
-        print("\t * "+self.name+" : ",end=" `")
-        print(*[tag['title'] for tag in self.tags], sep="`, `",end="` ")
+        print("\t * "+self.name+" : ",end="")
+        for tag in self.tags:
+            terminal.printTag(tag)
+        # print(*[tag['title'] for tag in self.tags], sep="`, `",end="` ")
         print()
 
 def listTags():
@@ -70,15 +72,17 @@ def listTags():
                 
                 curFileTags.append(item)
 
-            fileObj(name=title, tags = curFileTags, color=tags[title], ).show()
+            fileObj(name=title, tags = curFileTags ).show()
 
     print("\n# found tags in folder: \n")
-    for tag in tags:
-        print("\t* `"+tag+"`")
+    for title in tags:
+        tag = tags[title]
+        # print("\t* `"+tag+"`")
+        terminal.printTag(tag)
     print()
 
     if("s" in options or "-save" in options):
-        saveTag(tags.keys())
+        saveTag(tagsTitle=tags.keys(), tags=tags)
 
 def listGlobalTags():
     from pathlib import Path
@@ -87,21 +91,21 @@ def listGlobalTags():
     filepath = str(Path.home()) + "/.tagspaces.json"
 
     data = {
-            'tags':[]
+            'tags':{}
     }
     if(path.exists(filepath)):
         with open(filepath) as jsonfile:
             data = json.load(jsonfile)
     
     print("\n# listing global found tags\n")
-    for tag in data['tags']:
-        print("\t* `"+tag+"`")
+    for title in data['tags']:
+        print("\t* `"+data['tags'][title]['title']+"`")
     print()
 
 def printHelp():
     print("""
     # help
-    
+
     ## commands
 
     * list: list tags
