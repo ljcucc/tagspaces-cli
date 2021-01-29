@@ -61,6 +61,7 @@ def listTags():
 
     print("\n# files with tags: \n")
     for filename in filelist:
+        
         with open(path+filename, encoding='utf-8-sig') as jsonfile:
 
             data = json.load(jsonfile)
@@ -86,7 +87,7 @@ def listTags():
         # print("\t* `"+tag+"`")
         terminal.printTag(tag)
         print(", ",end="")
-    print()
+    print("\n")
 
     if("s" in options or "-save" in options):
         saveTag(tagsTitle=tags.keys(), tags=tags)

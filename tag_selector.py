@@ -1,5 +1,6 @@
 from pathlib import Path
 from os import path
+import os
 import json
 import terminal
 from time import sleep
@@ -8,6 +9,7 @@ import datetime
 selectedIndex = 0
 tags = {}
 selectedTags = {}
+filepath = ""
 
 def displayTag():
     global selectedIndex
@@ -76,7 +78,12 @@ def keyInput():
             })
         else:
             selectedTags.pop(title)
-        # print("\033[1A",end="")
+    elif(ord(mode) == 13):
+        saveTagToFile()
+        terminal.clearScreen()
+        print("DONE! tags are written into .ts/ folder. check it out by typing `tags l`.")
+        return
+
 
     if(selectedIndex < 0):
         selectedIndex = 0
@@ -92,7 +99,7 @@ def getSpecialFormat():
     result = result.split(".")
     result[1] = result[1][:3]
     result = ".".join(result)
-    return result
+    return result + "Z"
 
 def addTag():
     terminal.clearScreen()
@@ -127,14 +134,13 @@ def addTag():
         name: newTagData
     })
 
-def formatData():
-    print("starting format...")
-
 def updateTags():
     print("update tags...")
 
-def runWithPath(filepath):
-    global tags, selectedTagss
+def runWithPath(received_filepath):
+    global tags, selectedTags, filepath
+
+    filepath = received_filepath
 
     print("edit tag with filepath...")
     getTagsFromPath(filepath)
@@ -164,6 +170,23 @@ def getTagsFromPath(filepath):
         
         if(not title in tags):
             tags.update({title:tag})
+
+def saveTagToFile():
+    global selectedTags, filepath
+
+    tags = [selectedTags[title] for title in selectedTags]
+    data = {
+        'tags': tags,
+        'appName': "TagSpaces"
+    }
+
+    ts_file = path.dirname(filepath) + "/.ts/" + path.basename(filepath) + ".json"
+
+    if(not path.exists(path.dirname(filepath) + "/.ts/")):
+        os.mkdir(path.dirname(filepath) + "/.ts/")
+
+    with open(ts_file, mode="w", encoding='utf-8-sig') as jsonfile:
+        json.dump(data, jsonfile)
 
 def run():
     print("starting format...")
