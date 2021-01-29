@@ -53,6 +53,9 @@ def listTags():
     global options
 
     path = os.getcwd()+"/.ts/"
+    if(not os.path.exists(path)):
+        print("WARNING: `.ts/` is not found in this folder, trying to use `tags init` to init folder.")
+        return
     filelist = getFilelist(path)
     tags = {}
 
