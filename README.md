@@ -19,8 +19,6 @@ echo export "PATH=\$PATH":"$(pwd)/" >> ~/.zshrc
 
 ### Listing
 
-![](./assets/tags_list.png)
-
 Listing tags of files and tags in folder by using:
 ```bash
 tags list
@@ -41,12 +39,8 @@ tags list --global
 # or (-g) for abbr
 tags l -g
 ```
-Demo:
-![](./assets/tags_l_-g.png)
 
 ### Adding
-
-![](./assets/tags_n.gif)
 
 Adding new tag to file by using:
 
@@ -67,6 +61,16 @@ tags n --path ./README.md
 tags n -p ./README.md
 ```
 
+### Screenshots
+
+* tags list
+![](./assets/tags_list.png)
+
+* tags n
+![](./assets/tags_n.gif)
+
+* tags list --global
+![](./assets/tags_l_-g.png)
 
 ## QnA
 
