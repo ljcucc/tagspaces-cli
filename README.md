@@ -16,9 +16,11 @@ echo export "PATH=\$PATH":"$(pwd)/" >> ~/.bashrc
 # zsh
 echo export "PATH=\$PATH":"$(pwd)/" >> ~/.zshrc
 ```
-### Get Started
 
-#### Listing
+### Listing
+
+![](./assets/tags_list.png)
+
 Listing tags of files and tags in folder by using:
 ```bash
 tags list
@@ -39,10 +41,15 @@ tags list --global
 # or (-g) for abbr
 tags l -g
 ```
+Demo:
+![](./assets/tags_l_-g.png)
 
-#### Adding
+### Adding
+
+![](./assets/tags_n.gif)
 
 Adding new tag to file by using:
+
 ```bash
 # (👇) will auto open an terminal UI to select file and tags
 tags add
