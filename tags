@@ -3,6 +3,7 @@ import sys, os, glob, json
 
 # Local files
 import terminal, test
+import file_selector as fs
 
 def getFilelist(mypath):
     from os import listdir
@@ -105,22 +106,31 @@ def listGlobalTags():
 def printHelp():
     print("""
     # TagSpaces CLI
-    
+
     A CLI version of TagSpaces that compatible with official one and works just fine.
 
     ## commands
 
-    * list: list tags
+    * list: (or `l` for attr) list tags
         * -s : remember tags when detected
         * -g : print remembered tags in system
     """)
 
+def newTag():
+    global optionArgs
+
+    filepath = (fs.selectFile() if (not '-file' in optionArgs and not 'f' in optionArgs) else optionArgs[('-file' if '-file' in optionArgs else 'f')])
+
+    print("Create tag with file: "+str(filepath))
+
+
 options = []
+optionArgs = {}
 func = ""
 
 def main():
 
-    global options, func
+    global options, func, optionArgs
     '''for (index, arg) in enumerate(sys.argv):
         print(str(index) + ": " + arg)
         #print(os.getcwd())'''
@@ -130,7 +140,11 @@ def main():
 
     for command in args:
         if(command[0] != "-"):
-            func = command
+            if(len(options) == 0):
+                func = command
+            else:
+                optionArgs.update({options[-1:][0]:command})
+                options = options[:-1]
         else:
             options.append(command[1:])
 
@@ -142,9 +156,14 @@ def main():
             listTags()
         return
 
+    if(func == "add" or func == "add" or func == "n"):
+        newTag()
+        return
+
     if("-debug" in options):
         print("func:    " + func)
         print("options: " + str(options))
+        print("args: "+ str(optionArgs))
         return
     
     if(func == "test"):
