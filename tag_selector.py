@@ -40,7 +40,10 @@ def readTags():
         with open(filepath) as jsonfile:
             data = json.load(jsonfile)
     
-    tags = data['tags']
+    if(len(tags.keys()) > 0):
+        tags.update(data['tags'])
+    else:
+        tags = data['tags']
 
 def keyInput():
     global selectedIndex, selectedTags
@@ -60,8 +63,8 @@ def keyInput():
         confirm = input("WARNING: Are you sure you want to quit without save? (Y or yes) ")
         if(confirm.upper() == "Y" or confirm.upper() == "YES"):
             terminal.clearScreen()
-            print("OK, Cancel it, won't do any change!")
-            sleep(1)
+            print("OK, Cancel it, won't do anything!")
+            # sleep(1)
             return
     elif(ord(mode) == 32):
         # print(list(tags.keys()))
@@ -148,4 +151,4 @@ def run():
 
     keyInput() # looping
 
-    terminal.clearScreen()
+    # terminal.clearScreen()
