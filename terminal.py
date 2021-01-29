@@ -65,7 +65,7 @@ def clearScreen():
     _ = system('clear')
 
 def printTag(tag):
-    colorCode = tag['color'][:-2]
+    colorCode = tag['color'][:-2] if len(tag['color']) > 7 else tag['color']
     rgbCode = hex_to_rgb(colorCode)
 
     setTextColor(rgbCode[0], rgbCode[1],rgbCode[2])
