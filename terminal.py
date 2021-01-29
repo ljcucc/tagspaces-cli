@@ -57,6 +57,13 @@ def getWidth():
 def getHeight():
   return os.get_terminal_size().lines
 
+def clearScreen():
+  from os import system, name
+  if name == 'nt': 
+    _ = system('cls') 
+  else: 
+    _ = system('clear')
+
 def printTag(tag):
     colorCode = tag['color'][:-2]
     rgbCode = hex_to_rgb(colorCode)
