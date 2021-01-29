@@ -1,6 +1,10 @@
 # TagSpaces CLI
 TagSpaces is great, but how about the terminal users? now there's the new tool to you! the Tagspaces CLI.
-which compatible with the offical sidecar format.
+which compatible with the official sidecar format.
+
+### What is **sidecar** ?
+
+sidecar is one of method that TagSpaces using, which are a json files inside `.ts` folder to record tags you add for the files. find more info at [official documentation](https://docs.tagspaces.org/tagging#folder-tagging-with-sidecar-file)
 
 ## How to use?
 ### Installation
