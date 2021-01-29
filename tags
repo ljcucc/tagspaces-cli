@@ -108,7 +108,7 @@ def listGlobalTags():
     for title in data['tags']:
         print("\t* " ,end="")
         terminal.printTag(data['tags'][title])
-        print(", ",end="")
+        print(", ",end="\n")
         # print("\t* `"+data['tags'][title]['title']+"`")
     print()
 
