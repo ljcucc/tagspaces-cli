@@ -1,6 +1,7 @@
 def setTextColor(r,g,b):
-    print()
+    print("\x1b[38;5;%dm"% (rgb_to_xterm(r,g,b)), end="")
 
+# reference from: https://stackoverflow.com/questions/11765623/convert-hex-to-closest-x11-color-number
 def rgb_to_xterm(r, g, b):
     N = []
     for i, n in enumerate([47, 68, 40, 40, 40, 21]):
