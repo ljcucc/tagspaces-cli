@@ -119,10 +119,13 @@ def printHelp():
 def newTag():
     global optionArgs
 
-    filepath = (fs.selectFile() if (not '-file' in optionArgs and not 'f' in optionArgs) else optionArgs[('-file' if '-file' in optionArgs else 'f')])
+    filepath = (fs.selectFile() if (not '-file' in optionArgs and not 'f' in optionArgs nad not 'p' in optionArgs and not '-path' in optionArgs) else optionArgs[('-file' if '-file' in optionArgs else ('f' if 'f' in optionArgs else ('p' if 'p' in optionArgs else ('-path'))))])
 
     print("Create tag with file: "+str(filepath))
 
+def editGlobalTags():
+    print("Trying to edit global tags...")
+    print("function unfinished!")
 
 options = []
 optionArgs = {}
@@ -158,6 +161,10 @@ def main():
 
     if(func == "add" or func == "add" or func == "n"):
         newTag()
+        return
+    
+    if(func == "config" or func == "c"):
+        editGlobalTags()
         return
 
     if("-debug" in options):
