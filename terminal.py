@@ -46,6 +46,9 @@ def getchar():
 	if ord(ch) == 3: quit() # handle ctrl+C
 	return ch
 
+def move (y, x):
+  print("\033[%d;%dH" % (y, x))
+
 def printTag(tag):
     colorCode = tag['color'][:-2]
     rgbCode = hex_to_rgb(colorCode)
